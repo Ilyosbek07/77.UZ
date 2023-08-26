@@ -1,5 +1,5 @@
 from django.db import models
-# from apps.products.models import Category
+from apps.store.models import Category
 
 
 class BaseModel(models.Model):
@@ -8,25 +8,3 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
-
-
-class ApplicationUser(models.Model):
-    STATUS = (
-        ('active', 'Active'),
-        ('moderation', 'Moderation'),
-        ('cancelled', 'Cancelled'),
-    )
-
-    full_name = models.CharField(max_length=600)
-    project_name = models.CharField(max_length=600)
-    # category = models.ForeignKey(
-    #     Category,
-    #     related_name='product_category',
-    #     on_delete=models.CASCADE
-    # )
-    phone_number = models.CharField(max_length=600)
-    address = models.TextField()
-    status = models.CharField(choices=STATUS, max_length=300)
-
-    def __str__(self):
-        return self.full_name
