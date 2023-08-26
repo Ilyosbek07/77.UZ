@@ -1,3 +1,4 @@
+from apps.store.filters import AdFilter
 from rest_framework.views import Response
 from rest_framework.views import APIView
 from rest_framework import generics
@@ -24,9 +25,10 @@ class CategoriesAPIView(generics.ListAPIView):
     serializer_class = CategoryListSerializer
 
 
-class AdCreateAPIView(generics.CreateAPIView):
+class AdCreateAPIView(generics.ListCreateAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
+    filterset_class = AdFilter
 
 
 class RetrieveUpdateDeleteAPIView(generics.RetrieveUpdateDestroyAPIView):
