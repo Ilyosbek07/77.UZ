@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             'id',
-            'fullname',
+            'full_name',
             'email',
             'phone_number',
             'profile_photo',
@@ -49,3 +49,27 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         except Exception as e:
             raise ValidationError(str(e))
         return user
+class RegisterUserSerializer(serializers.ModelSerializer):
+    phone_number = serializers.CharField()
+    token = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = [
+            "full_name",
+            "project_name",
+            "category_id",
+            'phone_number',
+            'address',
+            "password",
+            "token",
+        ]
+        extra_kwargs = {
+            "password": {"write_only": True},
+            "token": {"read_only": True},
+        }
+
+    def get_token(self, user):
+        tokens = RefreshToken.for_user(user)
+        data = {"refresh": str(tokens), "access": str(tokens.access_token)}
+        return data

@@ -58,6 +58,7 @@ class User(AbstractUser, BaseModel):
     photo = models.FileField(upload_to='user/images')
     email = models.EmailField(unique=True)
     address = models.URLField()
+    phone_number = models.CharField(max_length=600)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
