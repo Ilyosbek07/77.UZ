@@ -79,3 +79,11 @@ class Ad(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+
+class PopularSearch(models.Model):
+    keyword = models.CharField(max_length=255, unique=True)
+    count = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.keyword
