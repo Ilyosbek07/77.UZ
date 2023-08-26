@@ -48,6 +48,7 @@ DJANGO_APPS = [
 CUSTOM_APPS = [
     "apps.common",
     "apps.users",
+    "apps.store",
 ]
 
 THIRD_PARTY_APPS = [
@@ -55,6 +56,7 @@ THIRD_PARTY_APPS = [
     'rest_framework_simplejwt',
     "drf_yasg",
     "corsheaders",
+    "ckeditor",
 ]
 
 REST_FRAMEWORK = {
