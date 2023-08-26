@@ -2,7 +2,7 @@ from rest_framework.views import Response
 from rest_framework.views import APIView
 from rest_framework import generics
 from apps.store.models import PopularSearch, Ad, Category
-from apps.store.serializers import CategoryListSerializer
+from apps.store.serializers import CategoryListSerializer, AdCreateSerializer
 
 
 class SearchPopularAPIView(APIView):
@@ -22,3 +22,8 @@ class AutoCompleteSearchView(APIView):
 class CategoriesAPIView(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryListSerializer
+
+
+class AdCreateAPIView(generics.CreateAPIView):
+    queryset = Ad.objects.all()
+    serializer_class = AdCreateSerializer

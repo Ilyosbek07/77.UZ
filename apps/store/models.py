@@ -81,6 +81,9 @@ class Ad(models.Model):
             self.slug = F"{slugify(self.name)}-{self.id}"
         super().save(*args, **kwargs)
 
+    def __str__(self):
+        return self.name
+
 
 class PopularSearch(models.Model):
     keyword = models.CharField(max_length=255, unique=True)
