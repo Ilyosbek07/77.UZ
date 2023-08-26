@@ -1,5 +1,4 @@
 from django.db import models
-from apps.store.models import Category
 
 
 class BaseModel(models.Model):
