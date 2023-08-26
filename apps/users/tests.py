@@ -1,27 +1,26 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from django.contrib.auth import get_user_model
-from django.urls import reverse
+from apps.store.models import Category
+from apps.users.models import User
 
 
 class UserTests(TestCase):
-
-    def setUp(self):
-        self.user = get_user_model().objects.create_user(
-            username='testuser',
-            email='test@example.com',
-            password='testpassword'
+    @classmethod
+    def setUpTestData(cls):
+        cls.category = Category.objects.create(
+            name='aaa'
         )
 
-    def test_user_creation(self):
-        user = self.user
-        self.assertTrue(isinstance(user, get_user_model()))
-        self.assertEqual(user.str(), user.email)
+        cls.user = User.objects.create_user(
+            username="testuser",
+            email="test@email.com",
+            password="secret",
+            phone_number="+998974436638",
+            category=cls.category.pk,
+        )
 
-    # def test_user_login(self):
-    #     response = self.client.login(username='testuser', password='testpassword')
-    #     self.assertTrue(response)
-    #     response = self.client.get(reverse('user-profile'))
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertContains(response, 'test@example.com')
-#
+    def test_user_model(self):
+        self.assertEqual(self.user.user_name, "testuser")
+        self.assertEqual(self.user.password, "secret")
+        self.assertEqual(self.user.email, "test@email.com")

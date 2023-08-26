@@ -47,7 +47,7 @@ class UserManager(AbastractUserManager):
 
 class User(AbstractUser, BaseModel):
     full_name = models.CharField(max_length=255)
-    user_name = models.CharField(max_length=255)
+    username = models.CharField(max_length=255,unique=True)
     category_id = models.ForeignKey(
         Category,
         related_name='user_category',
@@ -64,7 +64,7 @@ class User(AbstractUser, BaseModel):
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
 
-    USERNAME_FIELD = 'user_name'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
