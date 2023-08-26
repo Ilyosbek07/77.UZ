@@ -1,8 +1,9 @@
+from apps.store.filters import AdFilter
 from rest_framework.views import Response
 from rest_framework.views import APIView
 from rest_framework import generics
 from apps.store.models import PopularSearch, Ad, Category
-from apps.store.serializers import CategoryListSerializer, AdCreateSerializer
+from apps.store.serializers import CategoryListSerializer, AdSerializer
 
 
 class SearchPopularAPIView(APIView):
@@ -24,6 +25,16 @@ class CategoriesAPIView(generics.ListAPIView):
     serializer_class = CategoryListSerializer
 
 
-class AdCreateAPIView(generics.CreateAPIView):
+class AdCreateAPIView(generics.ListCreateAPIView):
     queryset = Ad.objects.all()
-    serializer_class = AdCreateSerializer
+    serializer_class = AdSerializer
+    filterset_class = AdFilter
+
+
+class RetrieveUpdateDeleteAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Ad.objects.all()
+    serializer_class = AdSerializer
+    lookup_field = "slug"
+
+
+
