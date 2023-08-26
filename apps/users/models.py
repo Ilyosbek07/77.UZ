@@ -1,3 +1,4 @@
+from apps.common.models import BaseModel
 from django.contrib.auth.hashers import make_password
 from django.core.validators import RegexValidator
 from django.db import models
