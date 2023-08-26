@@ -2,7 +2,7 @@ from rest_framework.views import Response
 from rest_framework.views import APIView
 from rest_framework import generics
 from apps.store.models import PopularSearch, Ad, Category
-from apps.store.serializers import CategoryListSerializer, AdCreateSerializer
+from apps.store.serializers import CategoryListSerializer, AdSerializer
 
 
 class SearchPopularAPIView(APIView):
@@ -26,4 +26,13 @@ class CategoriesAPIView(generics.ListAPIView):
 
 class AdCreateAPIView(generics.CreateAPIView):
     queryset = Ad.objects.all()
-    serializer_class = AdCreateSerializer
+    serializer_class = AdSerializer
+
+
+class RetrieveUpdateDeleteAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Ad.objects.all()
+    serializer_class = AdSerializer
+    lookup_field = "slug"
+
+
+
