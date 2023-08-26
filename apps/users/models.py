@@ -5,6 +5,8 @@ from django.contrib.auth.models import AbstractBaseUser, AbstractUser
 from django.contrib.auth.models import UserManager as AbastractUserManager
 from django.utils.translation import gettext_lazy as _
 
+from apps.common.models import BaseModel
+
 phone_regex_validator = RegexValidator(
     regex=r"^\+?1?\d{9,12}$",
     message=_("Номер телефона необходимо вводить в формате: «+99891234567». Допускается до 13 цифр."),
@@ -42,18 +44,24 @@ class UserManager(AbastractUserManager):
 
 
 class User(AbstractUser, BaseModel):
-    fullname = models.CharField(max_length=255)
-    username = models.CharField(max_length=255)
-    phone = models.CharField(max_length=125)
+    full_name = models.CharField(max_length=255)
+    user_name = models.CharField(max_length=255)
+    category_id = models.ForeignKey(
+        Category,
+        related_name='user_category',
+        on_delete=models.CASCADE
+    )
+    project_name = models.CharField(max_length=255)
+    profile_photo = models.CharField(max_length=125)
     photo = models.FileField(upload_to='user/images')
     email = models.EmailField(unique=True)
-    location = models.URLField()
+    address = models.URLField()
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'user_name'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
