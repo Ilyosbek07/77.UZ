@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.store.models import Category, SubCategory
+from apps.store.models import Category, SubCategory, Ad
 
 
 class SubCategorySerializer(serializers.ModelSerializer):
@@ -30,3 +30,9 @@ class CategoryListSerializer(serializers.ModelSerializer):
         for subcategory in obj.subcategories.all():
             total_ads_count += subcategory.ads.count()
         return total_ads_count
+
+
+class AdCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ad
+        fields = "__all__"
