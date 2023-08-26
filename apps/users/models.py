@@ -2,11 +2,12 @@ from apps.common.models import BaseModel
 from django.contrib.auth.hashers import make_password
 from django.core.validators import RegexValidator
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, AbstractUser
+from django.contrib.auth.models import AbstractBaseUser, AbstractUser, Group, Permission
 from django.contrib.auth.models import UserManager as AbastractUserManager
 from django.utils.translation import gettext_lazy as _
 
 from apps.common.models import BaseModel
+from apps.store.models import Category
 
 phone_regex_validator = RegexValidator(
     regex=r"^\+?1?\d{9,12}$",
@@ -66,6 +67,18 @@ class User(AbstractUser, BaseModel):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+    groups = models.ManyToManyField(
+        Group,
+        verbose_name=_('groups'), blank=True,
+        help_text=_('The groups this user belongs to.'), related_name='custom_user_set'
+        # Change this to a unique name
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        verbose_name=_('user permissions'), blank=True,
+        help_text=_('Specific permissions for this user.'),
+        related_name='custom_user_set'  # Change this to a unique name
+    )
 
     def __str__(self):
         return self.email
