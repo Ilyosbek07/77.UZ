@@ -1,5 +1,5 @@
 from django.db import models
-from apps.products.models import Category
+# from apps.products.models import Category
 
 
 class BaseModel(models.Model):
@@ -19,11 +19,11 @@ class ApplicationUser(models.Model):
 
     full_name = models.CharField(max_length=600)
     project_name = models.CharField(max_length=600)
-    category = models.ForeignKey(
-        Category,
-        related_name='product_category',
-        on_delete=models.CASCADE
-    )
+    # category = models.ForeignKey(
+    #     Category,
+    #     related_name='product_category',
+    #     on_delete=models.CASCADE
+    # )
     phone_number = models.CharField(max_length=600)
     address = models.TextField()
     status = models.CharField(choices=STATUS, max_length=300)
