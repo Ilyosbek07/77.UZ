@@ -1,46 +1,25 @@
 from apps.users.models import User
 from rest_framework import serializers
 from apps.store.models import Category, SubCategory, Ad, Photo, Address
+from apps.users.serializers import UserSerializer
 
 
 class SubCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = SubCategory
-        fields = (
-            "id",
-            "name"
-        )
+        fields = ("id", "name")
 
 
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = (
-            "id",
-            "image"
-        )
-
-
-class UserSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = (
-            "id",
-            "full_name",
-        )
+        fields = ("id", "image")
 
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
-        fields = (
-            "id",
-            "district",
-            "name",
-            "lat",
-            "long"
-        )
+        fields = ("id", "district", "name", "lat", "long")
 
 
 class CategoryListSerializer(serializers.ModelSerializer):
@@ -86,5 +65,5 @@ class AdSerializer(serializers.ModelSerializer):
             "address",
             "seller",
             "status",
-            "expires_at"
+            "expires_at",
         )

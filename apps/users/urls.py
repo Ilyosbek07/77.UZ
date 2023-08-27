@@ -14,7 +14,7 @@ urlpatterns = [
         Login.as_view(),
         name="token_obtain_pair",
     ),
-    path('me/', UserProfileView.as_view(), name='user_profile'),
+    path("me/", UserProfileView.as_view(), name="user_profile"),
     path("token/verify/", TokenVerifyView.as_view(), name="token_verify"),
     path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]

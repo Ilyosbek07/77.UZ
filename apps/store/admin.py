@@ -6,31 +6,28 @@ from apps.store.models import Ad, Category, District, Region, Photo, SubCategory
 
 
 class ApplicateUserAdmin(admin.ModelAdmin):
-    list_display = ['full_name', 'project_name']
-    search_fields = ['full_name', 'project_name']
+    list_display = ["full_name", "project_name"]
+    search_fields = ["full_name", "project_name"]
 
 
 class AdAdmin(admin.ModelAdmin):
-    search_fields = ['name']
+    search_fields = ["name"]
 
 
 class RegionAdmin(admin.ModelAdmin):
-    search_fields = ['name']
-
+    search_fields = ["name"]
 
 
 class DistrictAdmin(admin.ModelAdmin):
-    search_fields = ['name']
-
+    search_fields = ["name"]
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    search_fields = ['name']
-
+    search_fields = ["name"]
 
 
 class SubCategoryAdmin(admin.ModelAdmin):
-    search_fields = ['name', 'category']
+    search_fields = ["name", "category"]
 
 
 admin.site.register(Ad, AdAdmin)

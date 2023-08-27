@@ -8,9 +8,7 @@ from apps.users.models import User
 class UserTests(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.category = Category.objects.create(
-            name='aaa'
-        )
+        cls.category = Category.objects.create(name="aaa")
 
         cls.user = User.objects.create_user(
             username="testuser",
