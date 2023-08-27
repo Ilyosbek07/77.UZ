@@ -71,6 +71,11 @@ class User(AbstractUser, BaseModel):
 
 
 class Profile(models.Model):
+    user = models.ForeignKey(
+        User,
+        related_name='user',
+        on_delete=models.CASCADE
+    )
     address = models.ForeignKey(
         Address,
         related_name='address',
@@ -87,3 +92,6 @@ class Profile(models.Model):
         null=True,
         blank=True
     )
+
+    def __str__(self):
+        return self.user.full_name

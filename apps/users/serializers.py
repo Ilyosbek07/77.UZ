@@ -16,7 +16,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
-    phone_number = serializers.CharField()
     token = serializers.SerializerMethodField()
 
     class Meta:
@@ -43,24 +42,3 @@ class RegisterUserSerializer(serializers.ModelSerializer):
             raise ValidationError(str(e))
         return user
 
-
-class RegisterUserSerializer(serializers.ModelSerializer):
-    phone_number = serializers.CharField()
-    token = serializers.SerializerMethodField()
-
-    class Meta:
-        model = User
-        fields = [
-            "full_name",
-            "password",
-            "token",
-        ]
-        extra_kwargs = {
-            "password": {"write_only": True},
-            "token": {"read_only": True},
-        }
-
-    def get_token(self, user):
-        tokens = RefreshToken.for_user(user)
-        data = {"refresh": str(tokens), "access": str(tokens.access_token)}
-        return data

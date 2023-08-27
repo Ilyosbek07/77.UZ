@@ -74,7 +74,7 @@ class Ad(models.Model):
     phone_number = models.CharField(max_length=20)
     address = models.ForeignKey("Address", on_delete=models.CASCADE, related_name="ads")
     seller = models.ForeignKey(
-        "users.User", on_delete=models.CASCADE, related_name="ads"
+        "users.Profile", on_delete=models.CASCADE, related_name="ads"
     )
     status = models.CharField(max_length=15, choices=STATUS_CHOICES)
     expires_at = models.DateTimeField()

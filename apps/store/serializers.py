@@ -76,7 +76,6 @@ class AdUserSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "full_name",
-            "photo",
         )
 
 
