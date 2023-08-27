@@ -9,12 +9,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id',
-            'full_name',
-            'email',
-            'phone_number',
-            'profile_photo',
-            'address'
+            "id",
+            "full_name",
+            "email",
+            "phone_number",
+            "profile_photo",
+            "address",
         )
 
 
@@ -28,8 +28,8 @@ class RegisterUserSerializer(serializers.ModelSerializer):
             "full_name",
             "project_name",
             "category_id",
-            'phone_number',
-            'address',
+            "phone_number",
+            "address",
             "password",
             "token",
         ]
@@ -49,6 +49,8 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         except Exception as e:
             raise ValidationError(str(e))
         return user
+
+
 class RegisterUserSerializer(serializers.ModelSerializer):
     phone_number = serializers.CharField()
     token = serializers.SerializerMethodField()
@@ -59,8 +61,8 @@ class RegisterUserSerializer(serializers.ModelSerializer):
             "full_name",
             "project_name",
             "category_id",
-            'phone_number',
-            'address',
+            "phone_number",
+            "address",
             "password",
             "token",
         ]

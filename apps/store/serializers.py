@@ -1,74 +1,85 @@
 from apps.users.models import User
 from rest_framework import serializers
-from apps.store.models import Category, SubCategory, Ad, Photo, Address
-
-
-class SubCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SubCategory
-        fields = (
-            "id",
-            "name"
-        )
+from apps.store.models import (
+    Category,
+    SubCategory,
+    Ad,
+    Photo,
+    Address,
+    Region,
+    District,
+)
+from apps.users.serializers import UserSerializer
 
 
 class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = (
-            "id",
-            "image"
-        )
+        fields = ("image",)
 
 
-class UserSerializer(serializers.ModelSerializer):
+class RegionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Region
+        fields = ("id", "name")
+
+
+class DistrictSerializer(serializers.ModelSerializer):
+    region = RegionSerializer()
 
     class Meta:
-        model = User
-        fields = (
-            "id",
-            "full_name",
-        )
+        model = District
+        fields = ("id", "name", "region")
 
 
 class AddressSerializer(serializers.ModelSerializer):
+    district = DistrictSerializer()
+    lat = serializers.IntegerField()
+    long = serializers.IntegerField()
+
     class Meta:
         model = Address
-        fields = (
-            "id",
-            "district",
-            "name",
-            "lat",
-            "long"
-        )
+        fields = ("district", "name", "lat", "long")
 
 
 class CategoryListSerializer(serializers.ModelSerializer):
-    subcategories = SubCategorySerializer(many=True)
-    total_ads_count = serializers.SerializerMethodField()
+    ads_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
-        fields = (
-            "id",
-            "name",
-            "total_ads_count",
-            "icon",
-            "subcategories",
-        )
+        fields = ("id", "name", "ads_count", "icon")
 
-    def get_total_ads_count(self, obj):
+    def get_ads_count(self, obj):
         total_ads_count = 0
         for subcategory in obj.subcategories.all():
             total_ads_count += subcategory.ads.count()
         return total_ads_count
 
 
+class SubCategorySerializer(serializers.ModelSerializer):
+    category = CategoryListSerializer()
+
+    class Meta:
+        model = SubCategory
+        fields = ("id", "name", "category")
+
+
+class AdUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "full_name",
+            "photo",
+        )
+
+
 class AdSerializer(serializers.ModelSerializer):
     sub_category = SubCategorySerializer()
     photos = PhotoSerializer(many=True)
     address = AddressSerializer()
-    seller = UserSerializer()
+    seller = AdUserSerializer()
+    price = serializers.IntegerField()
 
     class Meta:
         model = Ad
@@ -86,5 +97,5 @@ class AdSerializer(serializers.ModelSerializer):
             "address",
             "seller",
             "status",
-            "expires_at"
+            "expires_at",
         )

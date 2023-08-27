@@ -22,9 +22,10 @@ class RegistrationView(generics.CreateAPIView):
     serializer_class = RegisterUserSerializer
     permission_classes = [IsAuthenticated]
 
+
 class Login(TokenObtainPairView):
     def post(self, request: Request, *args, **kwargs) -> Response:
         response = super().post(request, args, kwargs)
-        response.data['username'] = request.data['username']
-        response.data['password'] = request.data['password']
+        response.data["username"] = request.data["username"]
+        response.data["password"] = request.data["password"]
         return response
