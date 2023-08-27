@@ -17,7 +17,7 @@ class AutoCompleteSearchView(APIView):
     def get(self, request):
         search_terms = Ad.objects.values_list(
             "keyword", flat=True
-        )  # Fetch search terms from the model
+        )
 
         return Response(search_terms, status=200)
 
