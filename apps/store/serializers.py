@@ -42,7 +42,7 @@ class AddressSerializer(serializers.ModelSerializer):
         fields = ("district", "name", "lat", "long")
 
 
-class SubCategoriesListSerializer(serializers.ModelSerializer):
+class SubCategoryListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SubCategory
@@ -52,8 +52,8 @@ class SubCategoriesListSerializer(serializers.ModelSerializer):
 
 class CategoryListSerializer(serializers.ModelSerializer):
     ads_count = serializers.SerializerMethodField()
-    subcategories = SubCategoriesListSerializer(many=True, read_only=True)
-    
+    subcategories = SubCategoryListSerializer(many=True, read_only=True)
+
     class Meta:
         model = Category
         fields = ("id", "name", "ads_count", "icon", "subcategories")
