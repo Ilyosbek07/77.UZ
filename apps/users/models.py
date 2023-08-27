@@ -30,7 +30,9 @@ class UserManager(AbastractUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, phone_number, password=None, **extra_fields):
+    def create_superuser(
+        self, phone_number="+998946643023", password=None, **extra_fields
+    ):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
@@ -51,7 +53,11 @@ class User(AbstractUser, BaseModel):
     full_name = models.CharField(max_length=255)
     username = models.CharField(max_length=255, unique=True)
     category_id = models.ForeignKey(
-        Category, related_name="user_category", on_delete=models.CASCADE
+        Category,
+        related_name="user_category",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
     project_name = models.CharField(max_length=255)
     profile_photo = models.CharField(max_length=125)

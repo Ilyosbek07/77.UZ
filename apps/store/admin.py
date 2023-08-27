@@ -2,7 +2,15 @@ from django.contrib import admin
 
 from django.contrib import admin
 
-from apps.store.models import Ad, Category, District, Region, Photo, SubCategory
+from apps.store.models import (
+    Ad,
+    Category,
+    District,
+    Region,
+    Photo,
+    SubCategory,
+    Address,
+)
 
 
 class ApplicateUserAdmin(admin.ModelAdmin):
@@ -36,3 +44,5 @@ admin.site.register(Region, RegionAdmin)
 admin.site.register(District, DistrictAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
+admin.site.register(Photo)
+admin.site.register(Address)

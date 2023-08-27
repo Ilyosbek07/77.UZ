@@ -18,7 +18,7 @@ class AdFilter(django_filters.FilterSet):
 
     class Meta:
         model = Ad
-        fields = ("name", "sub_category", "address", "price")
+        fields = ("name",)
 
     def filter_category_ids(self, queryset, name, value):
         ids_list = value.split(",")
