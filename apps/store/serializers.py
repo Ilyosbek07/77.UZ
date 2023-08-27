@@ -9,7 +9,6 @@ from apps.store.models import (
     Region,
     District,
 )
-from apps.users.serializers import UserSerializer
 
 
 class PhotoSerializer(serializers.ModelSerializer):
@@ -42,12 +41,19 @@ class AddressSerializer(serializers.ModelSerializer):
         fields = ("district", "name", "lat", "long")
 
 
+class SubCategoryListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubCategory
+        fields = ("id", "name")
+
+
 class CategoryListSerializer(serializers.ModelSerializer):
     ads_count = serializers.SerializerMethodField()
+    subcategories = SubCategoryListSerializer(many=True, read_only=True)
 
     class Meta:
         model = Category
-        fields = ("id", "name", "ads_count", "icon")
+        fields = ("id", "name", "ads_count", "icon", "subcategories")
 
     def get_ads_count(self, obj):
         total_ads_count = 0

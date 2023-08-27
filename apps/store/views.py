@@ -1,4 +1,4 @@
-from apps.store.filters import AdFilter
+from apps.store.filters import AdFilter, ProfileAdsFilter
 from rest_framework.views import Response
 from rest_framework.views import APIView
 from rest_framework import generics
@@ -37,3 +37,9 @@ class RetrieveUpdateDeleteAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
     lookup_field = "slug"
+
+
+class UserAdsListAPIView(generics.ListAPIView):
+    queryset = Ad.objects.all()
+    serializer_class = AdSerializer
+    filterset_class = ProfileAdsFilter
