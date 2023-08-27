@@ -42,12 +42,21 @@ class AddressSerializer(serializers.ModelSerializer):
         fields = ("district", "name", "lat", "long")
 
 
-class CategoryListSerializer(serializers.ModelSerializer):
-    ads_count = serializers.SerializerMethodField()
+class SubCategoriesListSerializer(serializers.ModelSerializer):
 
     class Meta:
+        model = SubCategory
+        fields = ("id", "name")
+
+
+
+class CategoryListSerializer(serializers.ModelSerializer):
+    ads_count = serializers.SerializerMethodField()
+    subcategories = SubCategoriesListSerializer(many=True, read_only=True)
+    
+    class Meta:
         model = Category
-        fields = ("id", "name", "ads_count", "icon")
+        fields = ("id", "name", "ads_count", "icon", "subcategories")
 
     def get_ads_count(self, obj):
         total_ads_count = 0
