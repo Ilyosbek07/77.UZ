@@ -9,7 +9,6 @@ from apps.store.models import (
     Region,
     District,
 )
-from apps.users.serializers import UserSerializer
 
 
 class PhotoSerializer(serializers.ModelSerializer):
@@ -43,11 +42,9 @@ class AddressSerializer(serializers.ModelSerializer):
 
 
 class SubCategoryListSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = SubCategory
         fields = ("id", "name")
-
 
 
 class CategoryListSerializer(serializers.ModelSerializer):

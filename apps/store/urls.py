@@ -5,6 +5,7 @@ from apps.store.views import (
     CategoriesAPIView,
     AdCreateAPIView,
     RetrieveUpdateDeleteAPIView,
+    UserAdsListAPIView,
 )
 
 urlpatterns = [
@@ -18,5 +19,10 @@ urlpatterns = [
         "ads/<slug:slug>/",
         RetrieveUpdateDeleteAPIView.as_view(),
         name="retrieve-update-delete",
+    ),
+    path(
+        "my-ads/",
+        UserAdsListAPIView.as_view(),
+        name="my-ads",
     ),
 ]

@@ -32,11 +32,10 @@ class AdFilter(django_filters.FilterSet):
 class ProfileAdsFilter(django_filters.FilterSet):
     class Meta:
         model = Ad
-        fields = ("name", "sub_category", "address", "price")
+        fields = ("name",)
 
+    @property
     def qs(self):
-        queryset = super().qs
-        user = self.request.user.id
-        if user.is_authenticated:
-            return queryset.filter(seller=user)
-        return queryset.none()
+        parent = super().qs
+        user_id = getattr(self.request.user, "id", None)
+        return parent.filter(seller__id=user_id)
