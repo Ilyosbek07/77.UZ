@@ -12,9 +12,6 @@ class UserSerializer(serializers.ModelSerializer):
             "id",
             "full_name",
             "email",
-            "phone_number",
-            "profile_photo",
-            "address",
         )
 
 
@@ -26,10 +23,6 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             "full_name",
-            "project_name",
-            "category_id",
-            "phone_number",
-            "address",
             "password",
             "token",
         ]
@@ -59,10 +52,6 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             "full_name",
-            "project_name",
-            "category_id",
-            "phone_number",
-            "address",
             "password",
             "token",
         ]
