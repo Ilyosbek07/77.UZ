@@ -45,7 +45,6 @@ class UserManager(AbastractUserManager):
 class User(AbstractUser, BaseModel):
     full_name = models.CharField(max_length=255)
     username = models.CharField(max_length=255, unique=True)
-    email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)

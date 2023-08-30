@@ -1,7 +1,5 @@
 from django.contrib import admin
 
-from django.contrib import admin
-
 from apps.store.models import (
     Ad,
     Category,

@@ -39,6 +39,11 @@ class RetrieveUpdateDeleteAPIView(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "slug"
 
 
+# class RetrieveDeleteAPIView(generics.RetrieveDestroyAPIView):
+#     queryset = Ad.objects.all()
+#     serializer_class = AdSerializer
+#     lookup_field = "slug"
+
 class UserAdsListAPIView(generics.ListAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
